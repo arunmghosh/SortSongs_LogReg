@@ -71,7 +71,7 @@ Here is the learned logistic regression equation:
 P(y=1 \mid \mathbf{x}) = \sigma(- 0.0246 \cdot x_{\text{Monster}} - 0.3605 \cdot x_{\text{RagsRiches}} + 0.1741 \cdot x_{\text{Quest}} - 0.2358 \cdot x_{\text{VoyageReturn}} - 1.1735 \cdot x_{\text{Comedy}} + 0.7035 \cdot x_{\text{Tragedy}} + 0.6876 \cdot x_{\text{Rebirth}} + 0.0614)
 ```
 \
-In this case, [Interpretation goes here]
+In this case, Comedy was a very strong indicator that a song was written by Olivia Rodrigo, which matches our expectation. Similarly, the Tragedy and Rebirth archetypes hinted that a song was written by Gracie Abrams. Surprisingly, however, the Overcoming the Monster plot was the least helpful predictor, despite being more common in Olivia Rodrigo's songs. 
  
 ---
 
@@ -79,15 +79,17 @@ In this case, [Interpretation goes here]
 
 Here are the six learned logistic regression equations:
 ```math
-z_{\text{SOUR}} = 0.2906 \cdot x_{\text{Monster}} + 0.6389 \cdot x_{\text{RagsRiches}} - 0.5459 \cdot x_{\text{Quest}} - 0.2266 \cdot x_{\text{VoyageReturn}} - 0.0861 \cdot x_{\text{Comedy}} - 0.8630 \cdot x_{\text{Tragedy}} - 0.9558 \cdot x_{\text{Rebirth}} - 0.6280
-z_{\text{GUTS}} = 0.0890 \cdot x_{\text{Monster}} - 0.0050 \cdot x_{\text{RagsRiches}} + 0.2949 \cdot x_{\text{Quest}} + 0.3786 \cdot x_{\text{VoyageReturn}} + 0.9604 \cdot x_{\text{Comedy}} + 0.1509 \cdot x_{\text{Tragedy}} - 0.0412 \cdot x_{\text{Rebirth}} + 0.3912
-z_{\text{You seem pretty sad for a girl so in love}} = - 0.2922 \cdot x_{\text{Monster}} + 0.0133 \cdot x_{\text{RagsRiches}} + 0.0680 \cdot x_{\text{Quest}} + 0.1162 \cdot x_{\text{VoyageReturn}} + 0.6658 \cdot x_{\text{Comedy}} - 0.4081 \cdot x_{\text{Tragedy}} - 0.0998 \cdot x_{\text{Rebirth}} + 0.1296
-z_{\text{Good Riddance}} = - 0.2418 \cdot x_{\text{Monster}} - 0.2514 \cdot x_{\text{RagsRiches}} + 0.6727 \cdot x_{\text{Quest}} + 0.0614 \cdot x_{\text{VoyageReturn}} - 0.5826 \cdot x_{\text{Comedy}} + 0.5479 \cdot x_{\text{Tragedy}} + 0.3294 \cdot x_{\text{Rebirth}} - 0.0308
-z_{\text{The Secret Of Us}} = - 0.1592 \cdot x_{\text{Monster}} - 0.7316 \cdot x_{\text{RagsRiches}} + 0.1071 \cdot x_{\text{Quest}} + 0.2629 \cdot x_{\text{VoyageReturn}} - 0.2019 \cdot x_{\text{Comedy}} - 0.0645 \cdot x_{\text{Tragedy}} + 0.4632 \cdot x_{\text{Rebirth}} + 0.2067
+\begin{aligned}
+z_{\text{SOUR}} = 0.2906 \cdot x_{\text{Monster}} + 0.6389 \cdot x_{\text{RagsRiches}} - 0.5459 \cdot x_{\text{Quest}} - 0.2266 \cdot x_{\text{VoyageReturn}} - 0.0861 \cdot x_{\text{Comedy}} - 0.8630 \cdot x_{\text{Tragedy}} - 0.9558 \cdot x_{\text{Rebirth}} - 0.6280 \\
+z_{\text{GUTS}} = 0.0890 \cdot x_{\text{Monster}} - 0.0050 \cdot x_{\text{RagsRiches}} + 0.2949 \cdot x_{\text{Quest}} + 0.3786 \cdot x_{\text{VoyageReturn}} + 0.9604 \cdot x_{\text{Comedy}} + 0.1509 \cdot x_{\text{Tragedy}} - 0.0412 \cdot x_{\text{Rebirth}} + 0.3912 \\
+z_{\text{You seem pretty sad for a girl so in love}} = - 0.2922 \cdot x_{\text{Monster}} + 0.0133 \cdot x_{\text{RagsRiches}} + 0.0680 \cdot x_{\text{Quest}} + 0.1162 \cdot x_{\text{VoyageReturn}} + 0.6658 \cdot x_{\text{Comedy}} - 0.4081 \cdot x_{\text{Tragedy}} - 0.0998 \cdot x_{\text{Rebirth}} + 0.1296 \\
+z_{\text{Good Riddance}} = - 0.2418 \cdot x_{\text{Monster}} - 0.2514 \cdot x_{\text{RagsRiches}} + 0.6727 \cdot x_{\text{Quest}} + 0.0614 \cdot x_{\text{VoyageReturn}} - 0.5826 \cdot x_{\text{Comedy}} + 0.5479 \cdot x_{\text{Tragedy}} + 0.3294 \cdot x_{\text{Rebirth}} - 0.0308 \\
+z_{\text{The Secret Of Us}} = - 0.1592 \cdot x_{\text{Monster}} - 0.7316 \cdot x_{\text{RagsRiches}} + 0.1071 \cdot x_{\text{Quest}} + 0.2629 \cdot x_{\text{VoyageReturn}} - 0.2019 \cdot x_{\text{Comedy}} - 0.0645 \cdot x_{\text{Tragedy}} + 0.4632 \cdot x_{\text{Rebirth}} + 0.2067 \\
 z_{\text{Daughter From Hell}} = 0.3137 \cdot x_{\text{Monster}} + 0.3358 \cdot x_{\text{RagsRiches}} - 0.5967 \cdot x_{\text{Quest}} - 0.5925 \cdot x_{\text{VoyageReturn}} - 0.7556 \cdot x_{\text{Comedy}} + 0.6369 \cdot x_{\text{Tragedy}} + 0.3041 \cdot x_{\text{Rebirth}} - 0.0687
+\end{aligned}
 ```
 \
-In this case, [Interpretation goes here]
+In this case, we can make a few observations about the archetype profile of each album. SOUR is mainly characterized by the absence of tragedy, since its songs lean heavier into an external v.s. internal villain. GUTS leans more into comedy, a distinguishing feature from the other albums. Olivia's third album has this to a lesser extent, and still followed her trend of external rather than internal villains. On the other hand, Good Riddance focuses on Quest, Tragedy, and Rebirth, which makes sense for Gracie's introspective writing style. The Secret Of Us is characterized by lack of Rags to Riches plots, meaning Gracie doesn't tend to rewrite about good fortune, and her Rebirth insights tend to involve more regret than gained confidence. However, in her most recent album, Daughter From Hell, Gracie finally leans into the Monster plot, and away from Quest. Her lyrics are about more unintentional experience with her exes. However, she does so without the use of Comedy, a key difference from Olivia. This mostly matches the predictions from visually inspecting the data. 
  
 ---
 
@@ -107,7 +109,7 @@ b_{\text{Intercept}} &= 0.0614 \quad (90\% \text{ CI}: [-0.3863, 0.5092])
 \end{aligned}
 ```
 \
-[Interpretation goes here]
+Comedy is confirmed as the most reliable indicator of Olivia Rodrigo's songs, with the entire interval being strongly negative. Inversely, the intervals for Tragedy and Rebirth are positive, telling us that Gracie Abrams leans more into those archetypes. Unsurprisingly, many of the other archetypes had intervals that included 0, which tell us that both artists use them and they don't have much predictive power. However, the one surprising result here is that Overcoming the Monster was not a useful predictor for Olivia Rodrigo's songs. In our precursory analysis, we noted that Olivia tends to lean more into external villains while Gracie laments inward. Yet, Gracie's latest album did shift more into the Monster plot, and Olivia's newer albums experimented with comedy, among other new plots, which likely added some noise to the data. 
 
 ---
 
