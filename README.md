@@ -72,12 +72,12 @@ In this case, [Interpretation goes here]
 
 Here are the six learned logistic regression equations:
 ```math
-[equation goes here] # SOUR
-[equation goes here] # GUTS
-[equation goes here] # You seem pretty sad for a girl so in love
-[equation goes here] # Good Riddance
-[equation goes here] # The Secret Of Us
-[equation goes here] # Daughter From Hell
+[equation goes here] - SOUR
+[equation goes here] - GUTS
+[equation goes here] - You seem pretty sad for a girl so in love
+[equation goes here] - Good Riddance
+[equation goes here] - The Secret Of Us
+[equation goes here] - Daughter From Hell
 ```
 \
 In this case, [Interpretation goes here]
