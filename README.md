@@ -88,7 +88,7 @@ In this case, [Interpretation goes here]
 
 To validate that the results from part (1) were accurate, I ran phase 1 over 25 replications and reported 90% confidence intervals for each of the regression coefficients. Before each trial, the order of observations in the dataset was shuffled. 
 ```math
-[90% confidence intervals for coefficients go here]
+[confidence intervals for coefficients go here]
 ```
 \
 [Interpretation goes here]
