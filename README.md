@@ -1,6 +1,6 @@
 # Classifying Songs By Plot Archetypes Using Logistic Regression
 
-I use binary classification and multinomial softmax models to classify songs by artist (Olivia Rodrigo or Gracie Abrams) and album. For the binary classifier (the basic logistic regression model), features strong positive coefficients define Gracie Abrams' style, and vice versa. In the multinomial softmax model, all albums are compared against "SOUR" by Olivia Rodrigo, and positive coefficients mean that if a feature is observed more in a song, it is less likely to be from SOUR (and vice versa). The features in this data are how well each song fits each of the seven basic plot archetypes. 
+I use binary classification and multinomial softmax models to classify songs by artist (Olivia Rodrigo or Gracie Abrams) and album. For the binary classifier (the basic logistic regression model), features with strong positive coefficients define Gracie Abrams' style, and features with strong negative coefficients define Olivia Rodrigo's style. In the multinomial softmax model, each of the six albums is modeled with its own linear score equation ($z_k = \mathbf{w}_k^T \mathbf{x} + b_k$), and positive coefficients indicate that a feature makes a song more likely to belong to that specific album (and vice versa). The features in this data are how well each song fits each of the seven basic plot archetypes. 
 
 [Quick comment on results]
 
@@ -117,7 +117,36 @@ Comedy is confirmed as the most reliable indicator of Olivia Rodrigo's songs, wi
 
 To validate that the results from part (2) had some inherent meaning, I ran phase 2 over 25 replications. There are too many coefficients to report confidence intervals in a reader-friendly way, so instead I will make note of any significant sources of variation between the trials. Once again, the dataset was scrambled before each trial. 
 
-[Observations & interpretations go here]
+Across the 25 scrambled replications, the empirical variance of the fitted coefficients was virtually zero ($\text{std} \approx 10^{-16}$). This is an expected mathematical property of the L-BFGS optimization algorithm: because L-BFGS evaluates the multinomial cross-entropy loss over the complete dataset, full-batch convex optimization is strictly invariant to sample ordering. Consequently, observation shuffling confirms algorithmic stability, but empirical trial-to-trial variance would require bootstrap resampling (sampling with replacement) or cross-validation subsampling rather than row permutations.
+
+However, examining the **inter-album variability** of the learned coefficients across the six albums reveals the primary plot archetypes driving thematic differentiation:
+
+| Plot Archetype | Min Coefficient | Max Coefficient | Coefficient Range | Inter-Album Std | Highest Associating Album | Lowest Associating Album |
+|---|---|---|---|---|---|---|
+| **Comedy** | -0.7556 | +0.9604 | **1.7160** | **0.6224** | *GUTS* (+0.9604) | *Daughter From Hell* (-0.7556) |
+| **Tragedy** | -0.8630 | +0.6369 | **1.4999** | **0.5235** | *Daughter From Hell* (+0.6369) | *SOUR* (-0.8630) |
+| **Rebirth** | -0.9558 | +0.4632 | **1.4189** | **0.4727** | *The Secret Of Us* (+0.4632) | *SOUR* (-0.9558) |
+| **Rags to Riches** | -0.7316 | +0.6389 | **1.3704** | **0.4319** | *SOUR* (+0.6389) | *The Secret Of Us* (-0.7316) |
+| **The Quest** | -0.5967 | +0.6727 | **1.2694** | **0.4490** | *Good Riddance* (+0.6727) | *Daughter From Hell* (-0.5967) |
+| **Voyage and Return** | -0.5925 | +0.3786 | **0.9711** | **0.3246** | *GUTS* (+0.3786) | *Daughter From Hell* (-0.5925) |
+| **Overcoming the Monster** | -0.2922 | +0.3137 | **0.6059** | **0.2450** | *Daughter From Hell* (+0.3137) | *You seem pretty sad...* (-0.2922) |
+| *Intercept (Base Rate)* | -0.6280 | +0.3912 | 1.0192 | 0.3195 | *GUTS* (+0.3912) | *SOUR* (-0.6280) |
+
+#### Key Sources of Thematic Variability:
+1. **Comedy is the Single Largest Source of Album Divergence (Range: 1.7160, Std: 0.6224)**:
+   Comedy exhibits the widest spread of any feature in the model. It sharply splits the discographies: it strongly defines Olivia Rodrigo's sophomore release *GUTS* (+0.9604) and EP (+0.6658), but acts as an intense negative predictor for Gracie Abrams' serious, confessional projects *Daughter From Hell* (-0.7556) and *Good Riddance* (-0.5826).
+
+2. **Tragedy and Rebirth Form the Emotional Separation Axis (Ranges: 1.4999 and 1.4189)**:
+   Both Tragedy and Rebirth show wide divergence across the catalog. Gracie's *Daughter From Hell* (+0.6369) and *Good Riddance* (+0.5479) are heavily dominated by tragic introspection, whereas Olivia's debut *SOUR* strongly penalizes both Tragedy (-0.8630) and Rebirth (-0.9558), as its breakup anthems focus outward on external blame rather than internal self-destruction or renewal. Conversely, *The Secret Of Us* (+0.4632) is characterized most strongly by Rebirth.
+
+3. **Rags to Riches vs. Quest Distinguish Specific Eras**:
+   *SOUR* uniquely capitalizes on Rags to Riches (+0.6389), while *The Secret Of Us* actively rejects it (-0.7316). Meanwhile, *Good Riddance* stands out as a clear outlier on The Quest (+0.6727), reflecting deliberate exploratory emotional journeys that are notably absent from *Daughter From Hell* (-0.5967) and *SOUR* (-0.5459).
+
+4. **Overcoming the Monster Shows the Lowest Variability (Range: 0.6059, Std: 0.2450)**:
+   Across all six albums, the Monster archetype is the least differentiating feature, with its coefficients tightly constrained between -0.2922 and +0.3137. Battling an external adversary/ex is ubiquitous across pop breakup songwriting regardless of the specific album era, making it the weakest individual archetype for isolating a specific album.
+
+5. **Base Rate Intercept Variability (Range: 1.0192)**:
+   The baseline intercepts vary from -0.6280 (*SOUR*) to +0.3912 (*GUTS*). This spread primarily reflects album sample sizes in the dataset (*SOUR* has only 11 songs, while *GUTS* and *The Secret Of Us* have 17 songs each).
 
 ---
 
