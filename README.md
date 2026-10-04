@@ -68,7 +68,7 @@ Here were my results from running the full experiment:
 
 Here is the learned logistic regression equation:
 ```math
-[equation goes here]
+P(y=1 \mid \mathbf{x}) = \sigma(- 0.0246 \cdot x_{\text{Monster}} - 0.3605 \cdot x_{\text{RagsRiches}} + 0.1741 \cdot x_{\text{Quest}} - 0.2358 \cdot x_{\text{VoyageReturn}} - 1.1735 \cdot x_{\text{Comedy}} + 0.7035 \cdot x_{\text{Tragedy}} + 0.6876 \cdot x_{\text{Rebirth}} + 0.0614)
 ```
 \
 In this case, [Interpretation goes here]
@@ -79,12 +79,12 @@ In this case, [Interpretation goes here]
 
 Here are the six learned logistic regression equations:
 ```math
-[equation goes here] - SOUR
-[equation goes here] - GUTS
-[equation goes here] - You seem pretty sad for a girl so in love
-[equation goes here] - Good Riddance
-[equation goes here] - The Secret Of Us
-[equation goes here] - Daughter From Hell
+z_{\text{SOUR}} = 0.2906 \cdot x_{\text{Monster}} + 0.6389 \cdot x_{\text{RagsRiches}} - 0.5459 \cdot x_{\text{Quest}} - 0.2266 \cdot x_{\text{VoyageReturn}} - 0.0861 \cdot x_{\text{Comedy}} - 0.8630 \cdot x_{\text{Tragedy}} - 0.9558 \cdot x_{\text{Rebirth}} - 0.6280
+z_{\text{GUTS}} = 0.0890 \cdot x_{\text{Monster}} - 0.0050 \cdot x_{\text{RagsRiches}} + 0.2949 \cdot x_{\text{Quest}} + 0.3786 \cdot x_{\text{VoyageReturn}} + 0.9604 \cdot x_{\text{Comedy}} + 0.1509 \cdot x_{\text{Tragedy}} - 0.0412 \cdot x_{\text{Rebirth}} + 0.3912
+z_{\text{You seem pretty sad for a girl so in love}} = - 0.2922 \cdot x_{\text{Monster}} + 0.0133 \cdot x_{\text{RagsRiches}} + 0.0680 \cdot x_{\text{Quest}} + 0.1162 \cdot x_{\text{VoyageReturn}} + 0.6658 \cdot x_{\text{Comedy}} - 0.4081 \cdot x_{\text{Tragedy}} - 0.0998 \cdot x_{\text{Rebirth}} + 0.1296
+z_{\text{Good Riddance}} = - 0.2418 \cdot x_{\text{Monster}} - 0.2514 \cdot x_{\text{RagsRiches}} + 0.6727 \cdot x_{\text{Quest}} + 0.0614 \cdot x_{\text{VoyageReturn}} - 0.5826 \cdot x_{\text{Comedy}} + 0.5479 \cdot x_{\text{Tragedy}} + 0.3294 \cdot x_{\text{Rebirth}} - 0.0308
+z_{\text{The Secret Of Us}} = - 0.1592 \cdot x_{\text{Monster}} - 0.7316 \cdot x_{\text{RagsRiches}} + 0.1071 \cdot x_{\text{Quest}} + 0.2629 \cdot x_{\text{VoyageReturn}} - 0.2019 \cdot x_{\text{Comedy}} - 0.0645 \cdot x_{\text{Tragedy}} + 0.4632 \cdot x_{\text{Rebirth}} + 0.2067
+z_{\text{Daughter From Hell}} = 0.3137 \cdot x_{\text{Monster}} + 0.3358 \cdot x_{\text{RagsRiches}} - 0.5967 \cdot x_{\text{Quest}} - 0.5925 \cdot x_{\text{VoyageReturn}} - 0.7556 \cdot x_{\text{Comedy}} + 0.6369 \cdot x_{\text{Tragedy}} + 0.3041 \cdot x_{\text{Rebirth}} - 0.0687
 ```
 \
 In this case, [Interpretation goes here]
@@ -95,7 +95,16 @@ In this case, [Interpretation goes here]
 
 To validate that the results from part (1) were accurate, I ran phase 1 over 25 replications and reported 90% confidence intervals for each of the regression coefficients. Before each trial, the order of observations in the dataset was shuffled. 
 ```math
-[confidence intervals for coefficients go here]
+\begin{aligned}
+w_{\text{Monster}} &= -0.0246 \quad (90\% \text{ CI}: [-0.4862, 0.4370]) \\
+w_{\text{RagsRiches}} &= -0.3605 \quad (90\% \text{ CI}: [-0.8241, 0.1030]) \\
+w_{\text{Quest}} &= 0.1741 \quad (90\% \text{ CI}: [-0.3041, 0.6523]) \\
+w_{\text{VoyageReturn}} &= -0.2358 \quad (90\% \text{ CI}: [-0.7022, 0.2306]) \\
+w_{\text{Comedy}} &= -1.1735 \quad (90\% \text{ CI}: [-1.9056, -0.4413]) \\
+w_{\text{Tragedy}} &= 0.7035 \quad (90\% \text{ CI}: [0.2152, 1.1918]) \\
+w_{\text{Rebirth}} &= 0.6876 \quad (90\% \text{ CI}: [0.2109, 1.1642]) \\
+b_{\text{Intercept}} &= 0.0614 \quad (90\% \text{ CI}: [-0.3863, 0.5092])
+\end{aligned}
 ```
 \
 [Interpretation goes here]
@@ -146,9 +155,9 @@ gabrams_orodrigo/
 ## Installation & Usage
 
 ### Prerequisites
-The codebase requires (Python version and packages):
+The codebase requires Python 3.10+ and the following packages:
 ```bash
-pip install ... # packages go here
+pip install numpy pandas scikit-learn scipy openpyxl
 ```
 
 ### Run unittests
@@ -171,12 +180,12 @@ python3 runner.py --phase all
 ```
 
 #### 2. Run Individual Phases
-- **Phase 1 Only** (Initial steady state with equal stock proportions and $3.00 price):
+- **Phase 1 Only** (Binary classification of songs by artist: Olivia Rodrigo vs Gracie Abrams):
   ```bash
   python3 runner.py --phase 1 --trials 25
   ```
 
-- **Phase 2 Only** (Price perturbations, substitutability matrices, and demand curve estimation):
+- **Phase 2 Only** (Multinomial classification of songs across the 6 albums):
   ```bash
   python3 runner.py --phase 2 --trials 25 
   ```
