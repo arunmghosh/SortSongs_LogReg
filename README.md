@@ -50,7 +50,14 @@ This is one of the more self-explanatory and clear-cut archetypes. A comedic son
 A tragic song is about succumbing to an internal villain, and has the speaker lament their inability to overcome it. This is what most sad songs follow, but a perfect fit emphasizes that the speaker regrets who they've become in some way. 
 
 7) Rebirth
-In some ways, this is the sequel to or the opposite of a tragedy. The speaker overcomes internal adversity to reinvent themselves. A perfect fit gives the speaker some form of redemption after the positive transformation (like a comeback story). 
+In some ways, this is the sequel to or the opposite of a tragedy. The speaker overcomes internal adversity to reinvent themselves. A perfect fit gives the speaker some form of redemption after the positive transformation (like a comeback story).
+
+### Prediction
+I stored the data in a google sheet, and used Gemini to analyze trends to gain some level of intuition before running the regression. 
+\
+![Predicted trends](gabrams_orodrigo_trends.png)
+
+###
 ---
 
 ## Results & Analysis
