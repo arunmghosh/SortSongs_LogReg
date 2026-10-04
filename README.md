@@ -2,7 +2,7 @@
 
 I use binary classification and multinomial softmax models to classify songs by artist (Olivia Rodrigo or Gracie Abrams) and album. For the binary classifier (the basic logistic regression model), features with strong positive coefficients define Gracie Abrams' style, and features with strong negative coefficients define Olivia Rodrigo's style. In the multinomial softmax model, each of the six albums is modeled with its own linear score equation ($z_k = \mathbf{w}_k^T \mathbf{x} + b_k$), and positive coefficients indicate that a feature makes a song more likely to belong to that specific album (and vice versa). The features in this data are how well each song fits each of the seven basic plot archetypes. 
 
-[Quick comment on results]
+In summary, the artist classifier confirmed many of the predicted archetype trends for each artist, but the album classifier was too weak to have meaningful results due to several thematic similarities between albums. Blog post: https://medium.com/@electric.rockfan/i-thought-olivia-rodrigo-sounded-like-gracie-abrams-and-it-bugged-me-9590de1f49b2
 
 For future work, I will try to use a K-Means classifier on a larger dataset of songs from more artists to see which artists like to write which kinds of songs. Each cluster will be interpretable based on the seven basic plot archetypes, and I will analyze how many songs from each artist are in each cluster. 
 
