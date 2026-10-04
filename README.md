@@ -133,32 +133,27 @@ However, examining the **inter-album variability** of the learned coefficients a
 | *Intercept (Base Rate)* | -0.6280 | +0.3912 | 1.0192 | 0.3195 | *GUTS* (+0.3912) | *SOUR* (-0.6280) |
 
 #### Key Sources of Thematic Variability:
-1. **Comedy is the Single Largest Source of Album Divergence (Range: 1.7160, Std: 0.6224)**:
-   Comedy exhibits the widest spread of any feature in the model. It sharply splits the discographies: it strongly defines Olivia Rodrigo's sophomore release *GUTS* (+0.9604) and EP (+0.6658), but acts as an intense negative predictor for Gracie Abrams' serious, confessional projects *Daughter From Hell* (-0.7556) and *Good Riddance* (-0.5826).
+1. Comedy is confirmed as the biggest separator between albums by Olivia and Gracie, and the biggest indicator that a song belongs to GUTS. 
 
-2. **Tragedy and Rebirth Form the Emotional Separation Axis (Ranges: 1.4999 and 1.4189)**:
-   Both Tragedy and Rebirth show wide divergence across the catalog. Gracie's *Daughter From Hell* (+0.6369) and *Good Riddance* (+0.5479) are heavily dominated by tragic introspection, whereas Olivia's debut *SOUR* strongly penalizes both Tragedy (-0.8630) and Rebirth (-0.9558), as its breakup anthems focus outward on external blame rather than internal self-destruction or renewal. Conversely, *The Secret Of Us* (+0.4632) is characterized most strongly by Rebirth.
+2. Both Tragedy and Rebirth show wide divergence across the data, differentiating Gracie's introspective albums from Olivia's angry "SOUR" album.
 
-3. **Rags to Riches vs. Quest Distinguish Specific Eras**:
-   *SOUR* uniquely capitalizes on Rags to Riches (+0.6389), while *The Secret Of Us* actively rejects it (-0.7316). Meanwhile, *Good Riddance* stands out as a clear outlier on The Quest (+0.6727), reflecting deliberate exploratory emotional journeys that are notably absent from *Daughter From Hell* (-0.5967) and *SOUR* (-0.5459).
+3. Interestingly, Rags to Riches and The Quest seem to be time differentiators for Olivia and Gracie, respectively, showing up most often in their debut albums.
 
-4. **Overcoming the Monster Shows the Lowest Variability (Range: 0.6059, Std: 0.2450)**:
-   Across all six albums, the Monster archetype is the least differentiating feature, with its coefficients tightly constrained between -0.2922 and +0.3137. Battling an external adversary/ex is ubiquitous across pop breakup songwriting regardless of the specific album era, making it the weakest individual archetype for isolating a specific album.
-
-5. **Base Rate Intercept Variability (Range: 1.0192)**:
-   The baseline intercepts vary from -0.6280 (*SOUR*) to +0.3912 (*GUTS*). This spread primarily reflects album sample sizes in the dataset (*SOUR* has only 11 songs, while *GUTS* and *The Secret Of Us* have 17 songs each).
+4. Across all six albums, the Monster archetype is the least differentiating feature. Hating your ex is ubiquitous across pop breakup songs, so this makes sense.
 
 ---
 
 ### 5. Conclusions & Discussion
 
-[Comment on general accuracy and interpretability of results]
+In the artist classification phase, the regression has a precision of 75% for Olivia, and a recall of 58.54%. The main cause of the lower recall is that roughly 17/41 of Olivia's songs didn't have strong Monster or Comedy archetypes present, so they were misclassified. 
 
----
+For Gracie, however, the precision was 70.69%, and recall was actually higher at 83.67%. One possible explanation for the higher recall is that Gracie's style is more thematically consistent (all three of her albums in the dataset were introspective). 
 
-#### Changes from Original Specification 
+Due to high thematic overlap between the various albums, however, the album classification had a weighted average precision of 45.89%, and a recall of 44.44%. One interesting phenomenon I noticed contribute to this poor accuracy was that the regression didn't take into account the original size of each album when making predictions. It predicted that only four songs belonged to Olivia's most recent album, when that album actually has 13 songs. Similarly, it predicted that 21 songs belonged to SOUR, when SOUR only has 11 songs. It would be interesting to investigate if somehow forcing the model to stick to the original track list counts would improve these statistics. 
 
-[Report any changes here]
+Since this was a very small dataset, I was mainly looking for reproducibility of the true labels and which features best explained the predictions. There is no need to generalize these results, so there was no train/test split. Thus, to quantify the uncertainty discussed in part 3, I used the Fisher Information Matrix (asymptotic Wald confidence intervals) since the dataset was the entire population considered. 
+
+Overall, while the artist classification model generally picked up on the trends I observed before the regressions, the album classification model is far too weak to pick up on true differences between the albums studied. I would need a larger dataset with more features than plot archetypes. For lyrical features, we could have song structure, rhyme patterns, word choice, etc. And unique artist/album styles are likely rooted in musical/audio features as well, which was outside the scope of this study. 
 
 ---
 
